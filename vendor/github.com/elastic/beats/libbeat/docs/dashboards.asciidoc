@@ -1,0 +1,83 @@
+//////////////////////////////////////////////////////////////////////////
+//// This content is shared by all Elastic Beats. Make sure you keep the
+//// descriptions here generic enough to work for all Beats that include
+//// this file. When using cross references, make sure that the cross
+//// references resolve correctly for any files that include this one.
+//// Use the appropriate variables defined in the index.asciidoc file to
+//// resolve Beat names: beatname_uc and beatname_lc. This topic must
+//// be included under a level 3 header.
+//// Use the following include to pull this content into a doc file:
+//// include::../../libbeat/docs/dashboards.asciidoc[]
+//////////////////////////////////////////////////////////////////////////
+
+
+[[load-kibana-dashboards]]
+==== Set up the dashboards
+
+{beatname_uc} comes packaged with example Kibana dashboards, visualizations,
+and searches for visualizing {beatname_uc} data in Kibana. Before you can use
+the dashboards, you need to run the `setup` command to create the index
+pattern, +{beatname_lc}-*+, and load the dashboards into the Kibana index.
+
+NOTE: Starting with Beats 6.0.0, the dashboards are loaded via the Kibana API.
+This requires a Kibana endpoint configuration. You should have configured the
+endpoint earlier. If you didn't, configure it now.
+
+To set up the Kibana dashboards for {beatname_uc}:
+
+ifdef::allplatforms[]
+
+*deb, rpm, and mac:*
+
+From the directory where you installed {beatname_uc}, run:
+
+["source","sh",subs="attributes,callouts"]
+----------------------------------------------------------------------
+./{beatname_lc} setup
+----------------------------------------------------------------------
+
+ifeval::["{beatname_lc}"!="auditbeat"]
+
+*docker:*
+
+["source","sh",subs="attributes"]
+----------------------------------------------------------------------
+docker run {dockerimage} setup
+----------------------------------------------------------------------
+
+endif::[]
+
+*win:*
+
+endif::allplatforms[]
+
+Open a PowerShell prompt as an Administrator (right-click the PowerShell icon
+and select *Run As Administrator*). If you are running Windows XP, you may need
+to download and install PowerShell.
+
+From the PowerShell prompt, change to the directory where you installed {beatname_uc},
+and run:
+
+["source","sh",subs="attributes,callouts"]
+----------------------------------------------------------------------
+PS > {beatname_lc} setup
+----------------------------------------------------------------------
+
+
+[[view-kibana-dashboards]]
+==== Open the dashboards in Kibana
+
+After loading the dashboards, launch the Kibana web interface by pointing your browser
+to port 5601. For example, http://127.0.0.1:5601[http://127.0.0.1:5601].
+
+On the *Discover* page, make sure that the predefined +{beatname_lc}-*+ index
+pattern is selected to see {beatname_uc} data.
+
+image:./images/kibana-created-indexes.png[Discover tab with index selected]
+
+To open the loaded dashboards, go to the *Dashboard* page and select the
+dashboard that you want to open.
+
+image:./images/kibana-navigation-vis.png[Navigation widget in Kibana]
+
+

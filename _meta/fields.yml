@@ -1,0 +1,4 @@
+- key: kafkabeat
+  title: kafkabeat
+  description:
+  fields:
