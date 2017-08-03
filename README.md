@@ -12,8 +12,9 @@ Elasticsearch.
 
 ### Init Project
 
-Ensure that this folder is at the following location:
-`${GOPATH}/src/github.com/justsocialapps/kafkabeat`
+```
+go get github.com/justsocialapps/kafkabeat
+```
 
 To get running with Kafkabeat and also install the
 dependencies, run the following command:
