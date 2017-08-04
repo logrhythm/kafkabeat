@@ -5,7 +5,6 @@ BEAT_URL=https://${BEAT_PATH}
 SYSTEM_TESTS=false
 TEST_ENVIRONMENT=false
 ES_BEATS?=./vendor/github.com/elastic/beats
-GOPACKAGES=$(shell govendor list +local)
 PREFIX?=.
 NOTICE_FILE=NOTICE
 
@@ -23,21 +22,6 @@ copy-vendor:
 	mkdir -p vendor/github.com/elastic/
 	cp -R ${BEAT_GOPATH}/src/github.com/elastic/beats vendor/github.com/elastic/
 	rm -rf vendor/github.com/elastic/beats/.git
-
-.PHONY: git-init
-git-init:
-	git init
-	git add README.md CONTRIBUTING.md
-	git commit -m "Initial commit"
-	git add LICENSE
-	git commit -m "Add the LICENSE"
-	git add .gitignore
-	git commit -m "Add git settings"
-	git add .
-	git reset -- .travis.yml
-	git commit -m "Add kafkabeat"
-	git add .travis.yml
-	git commit -m "Add Travis CI"
 
 # This is called by the beats packer before building starts
 .PHONY: before-build

@@ -212,17 +212,6 @@ Image labels.
 
 None
 
-
-[float]
-=== counter
-
-type: long
-
-required: True
-
-PLEASE UPDATE DOCUMENTATION
-
-
 [[exported-fields-kubernetes-processor]]
 == kubernetes Fields
 

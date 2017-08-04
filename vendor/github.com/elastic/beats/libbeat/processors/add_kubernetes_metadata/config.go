@@ -17,7 +17,6 @@ type kubeAnnotatorConfig struct {
 	DefaultMatchers    Enabled       `config:"default_matchers"`
 	DefaultIndexers    Enabled       `config:"default_indexers"`
 	IncludeLabels      []string      `config:"include_labels"`
-	ExcludeLabels      []string      `config:"exclude_labels"`
 	IncludeAnnotations []string      `config:"include_annotations"`
 }
 

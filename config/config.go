@@ -3,12 +3,7 @@
 
 package config
 
-import "time"
-
 type Config struct {
-	Period time.Duration `config:"period"`
 }
 
-var DefaultConfig = Config{
-	Period: 1 * time.Second,
-}
+var DefaultConfig = Config{}

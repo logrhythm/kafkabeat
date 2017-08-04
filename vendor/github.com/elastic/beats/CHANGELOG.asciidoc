@@ -14,6 +14,12 @@ https://github.com/elastic/beats/compare/v6.0.0-beta1...master[Check the HEAD di
 
 *Affecting all Beats*
 
+- The log directory (`path.log`) for Windows services is now set to `C:\ProgramData\[beatname]\logs`. {issue}4764[4764]
+
+*Auditbeat*
+
+- Changed file metricset config to make `file.paths` a list instead of a dictionary. {pull}4796[4796]
+
 *Filebeat*
 
 *Heartbeat*
@@ -26,11 +32,24 @@ https://github.com/elastic/beats/compare/v6.0.0-beta1...master[Check the HEAD di
 
 ==== Bugfixes
 
+*Affecting all Beats*
+- Fix go plugins not loaded when beat starts {pull}4799[4799]
+
+*Auditbeat*
+
+- Fix `file.max_file_size` config option for the audit file metricset. {pull}4796[4796]
+
 *Filebeat*
+
+*Filebeat*
+
+- Fix issue where the `fileset.module` could have the wrong value. {issue}4761[4761]
 
 *Heartbeat*
 
 *Metricbeat*
+
+- Support `npipe` protocol (Windows) in Docker module. {pull}4751[4751]
 
 *Packetbeat*
 
@@ -40,13 +59,16 @@ https://github.com/elastic/beats/compare/v6.0.0-beta1...master[Check the HEAD di
 
 *Affecting all Beats*
 
+*Auditbeat*
+
+- Added `file.hash_types` config option for controlling the hash types. {pull}4796[4796]
+- Added the ability to specify byte unit suffixes to `file.max_file_size`. {pull}4796[4796]
+
 *Filebeat*
 
 *Heartbeat*
 
 *Metricbeat*
-
-- Add support to exclude labels from kubernetes pod metadata. {pull}4757[4757]
 
 *Packetbeat*
 
@@ -89,6 +111,7 @@ https://github.com/elastic/beats/compare/v6.0.0-alpha2...v6.0.0-beta1[View commi
 - Remove setting `queue_size` and `bulk_queue_size`. {pull}4650[4650]
 - Remove setting `dashboard.snapshot` and `dashboard.snapshot_url`. They are no longer needed because the
   dashboards are included in the packages by default. {pull}4675[4675]
+- Beats can no longer be launched from Windows Explorer (GUI), command line is required. {pull}4420[4420]
 
 *Heartbeat*
 
