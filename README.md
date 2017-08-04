@@ -1,5 +1,7 @@
 # Kafkabeat
 
+[![Build Status](https://travis-ci.org/justsocialapps/kafkabeat.svg?branch=master)](https://travis-ci.org/justsocialapps/kafkabeat)
+
 Kafkabeat is an elastic [beat](https://www.elastic.co/products/beats) that reads
 events from a [Kafka](https://kafka.apache.org) topic and forwards them to
 Elasticsearch.
