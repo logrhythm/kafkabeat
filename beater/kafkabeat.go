@@ -22,7 +22,6 @@ type Kafkabeat struct {
 
 // Creates beater
 func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
-	logp.Info("Config: %#v", cfg)
 	config := config.DefaultConfig
 	if err := cfg.Unpack(&config); err != nil {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
@@ -32,7 +31,7 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 	kafkaConfig.Consumer.Return.Errors = true
 	kafkaConfig.Group.Return.Notifications = true
 
-	consumer, err := cluster.NewConsumer([]string{"localhost:9092"}, "kafkabeat", []string{"tracking"}, kafkaConfig)
+	consumer, err := cluster.NewConsumer(config.Brokers, config.Group, config.Topics, kafkaConfig)
 	if err != nil {
 		return nil, fmt.Errorf("Error starting consumer on %s: %s", "tracking", err)
 	}

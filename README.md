@@ -29,8 +29,22 @@ To run Kafkabeat with debugging output enabled, run:
 ./kafkabeat -c kafkabeat.yml -e -d "*"
 ```
 
+### Configuring
 
-### Test
+An example configuration can be found in the file `kafkabeat.yml`. The following
+parameters are specific to Kafkabeat:
+
+```
+kafkabeat:
+    # a list of Kafka brokers to connect to
+    brokers: ["localhost:9092"]
+    # A list of topics to subscribe to
+    topics: ["tracking"]
+    # The consumer group to join
+    group: "kafkabeat"
+```
+
+### Testing
 
 To test Kafkabeat, run the following command:
 
