@@ -6,6 +6,9 @@ Kafkabeat is an elastic [beat](https://www.elastic.co/products/beats) that reads
 events from a [Kafka](https://kafka.apache.org) topic and forwards them to
 Elasticsearch.
 
+The consumer implements an at-least-once behaviour which means that messages may
+be forwarded to the configured output more than once.
+
 ## Getting Started with Kafkabeat
 
 ### Requirements
