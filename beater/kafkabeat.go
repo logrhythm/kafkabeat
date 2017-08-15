@@ -9,6 +9,7 @@ import (
 	"github.com/elastic/beats/libbeat/logp"
 	"github.com/elastic/beats/libbeat/publisher/bc/publisher"
 
+	"github.com/Shopify/sarama"
 	"github.com/justsocialapps/kafkabeat/config"
 	cluster "gopkg.in/bsm/sarama-cluster.v2"
 )
@@ -30,6 +31,7 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 	kafkaConfig := cluster.NewConfig()
 	kafkaConfig.Consumer.Return.Errors = true
 	kafkaConfig.Group.Return.Notifications = true
+	kafkaConfig.Config.Consumer.Offsets.Initial = sarama.OffsetOldest
 
 	consumer, err := cluster.NewConsumer(config.Brokers, config.Group, config.Topics, kafkaConfig)
 	if err != nil {
@@ -49,8 +51,6 @@ func (bt *Kafkabeat) Run(b *beat.Beat) error {
 
 	bt.client = b.Publisher.Connect()
 
-	counter := 0
-
 	for {
 		select {
 		case <-bt.done:
@@ -62,9 +62,9 @@ func (bt *Kafkabeat) Run(b *beat.Beat) error {
 				"type":       b.Info.Name,
 				"message":    string(ev.Value),
 			}
-			bt.client.PublishEvent(event)
-			bt.consumer.MarkOffset(ev, "")
-			counter++
+			if bt.client.PublishEvent(event, publisher.Guaranteed, publisher.Sync) {
+				bt.consumer.MarkOffset(ev, "")
+			}
 		case notification := <-bt.consumer.Notifications():
 			logp.Info("Rebalanced: %+v", notification)
 		case err := <-bt.consumer.Errors():
