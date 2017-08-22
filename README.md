@@ -17,7 +17,7 @@ be forwarded to the configured output more than once.
 
 ### Building
 
-```
+```sh
 # Make sure $GOPATH is set
 go get github.com/justsocialapps/kafkabeat
 cd $GOPATH/src/github.com/justsocialapps/kafkabeat
@@ -28,7 +28,7 @@ make
 
 To run Kafkabeat with debugging output enabled, run:
 
-```
+```sh
 ./kafkabeat -c kafkabeat.yml -e -d "*"
 ```
 
@@ -37,7 +37,7 @@ To run Kafkabeat with debugging output enabled, run:
 An example configuration can be found in the file `kafkabeat.yml`. The following
 parameters are specific to Kafkabeat:
 
-```
+```yaml
 kafkabeat:
     # a list of Kafka brokers to connect to
     brokers: ["localhost:9092"]
@@ -51,12 +51,13 @@ kafkabeat:
 
 To test Kafkabeat, run the following command:
 
-```
+```sh
 make testsuite
 ```
 
 alternatively:
-```
+
+```sh
 make unit-tests
 make system-tests
 make integration-tests
