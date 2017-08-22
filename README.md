@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/justsocialapps/kafkabeat.svg?branch=master)](https://travis-ci.org/justsocialapps/kafkabeat)
 
-Kafkabeat is an elastic [beat](https://www.elastic.co/products/beats) that reads
-events from a [Kafka](https://kafka.apache.org) topic and forwards them to
-Elasticsearch.
+Kafkabeat is an elastic [Beat](https://www.elastic.co/products/beats) that reads
+events from one or more [Kafka](https://kafka.apache.org) topics and forwards them to
+[Logstash](https://www.elastic.co/products/logstash) (or any other configured output).
 
-The consumer implements an at-least-once behaviour which means that messages may
-be forwarded to the configured output more than once.
+The Kafka consumer implements an at-least-once behaviour which means that
+messages may be forwarded to the configured output more than once.
 
 ## Getting Started with Kafkabeat
 
