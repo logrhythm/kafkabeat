@@ -7,6 +7,7 @@ TEST_ENVIRONMENT=false
 ES_BEATS?=./vendor/github.com/elastic/beats
 PREFIX?=.
 NOTICE_FILE=NOTICE
+CHECK_HEADERS_DISABLED=true
 
 # Path to the libbeat Makefile
 -include $(ES_BEATS)/libbeat/scripts/Makefile
