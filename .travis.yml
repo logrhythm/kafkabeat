@@ -10,7 +10,6 @@ go:
 
 os:
   - linux
-  - osx
 
 env:
   matrix:
@@ -33,7 +32,6 @@ before_install:
   - rsync -az ${TRAVIS_BUILD_DIR}/ $HOME/gopath/src/github.com/justsocialapps/kafkabeat/
   - export TRAVIS_BUILD_DIR=$HOME/gopath/src/github.com/justsocialapps/kafkabeat/
   - cd $HOME/gopath/src/github.com/justsocialapps/kafkabeat/
-  - if [ $TRAVIS_OS_NAME = osx ]; then pip install virtualenv; fi
 
 install:
   - true
