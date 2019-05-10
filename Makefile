@@ -1,5 +1,5 @@
-BEAT_NAME=examplebeat
-BEAT_PATH=github.com/justsocialapps/examplebeat
+BEAT_NAME=kafkabeat
+BEAT_PATH=github.com/justsocialapps/kafkabeat
 BEAT_GOPATH=$(firstword $(subst :, ,${GOPATH}))
 SYSTEM_TESTS=false
 TEST_ENVIRONMENT=false
