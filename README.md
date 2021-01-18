@@ -1,6 +1,6 @@
 # Kafkabeat
 
-[![Build Status](https://travis-ci.org/justsocialapps/kafkabeat.svg?branch=master)](https://travis-ci.org/justsocialapps/kafkabeat)
+[![Build Status](https://travis-ci.org/logrhythm/kafkabeat.svg?branch=master)](https://travis-ci.org/logrhythm/kafkabeat)
 
 Kafkabeat is an elastic [Beat](https://www.elastic.co/products/beats) that reads
 events from one or more [Kafka](https://kafka.apache.org) topics and forwards them to
@@ -19,8 +19,8 @@ messages may be forwarded to the configured output more than once.
 
 ```sh
 # Make sure $GOPATH is set
-go get github.com/justsocialapps/kafkabeat
-cd $GOPATH/src/github.com/justsocialapps/kafkabeat
+go get github.com/logrhythm/kafkabeat
+cd $GOPATH/src/github.com/logrhythm/kafkabeat
 make
 ```
 

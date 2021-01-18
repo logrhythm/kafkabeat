@@ -4,13 +4,21 @@
 package config
 
 type Config struct {
-	Brokers []string `config:"brokers"`
-	Topics  []string `config:"topics"`
-	Group   string   `config:"group"`
+	Brokers                 []string `config:"brokers"`
+	Topics                  []string `config:"topics"`
+	Group                   string   `config:"group"`
+	TLSEnabled              bool     `config:"tls_enabled"`
+	TLSCertificateAuthority string   `config:"tls_certificate_authorities"`
+	TLSCertificate          string   `config:"tls_certificate"`
+	TLSCertificateKey       string   `config:"tls_certificate_key"`
 }
 
 var DefaultConfig = Config{
-	Brokers: []string{"localhost:9092"},
-	Topics:  []string{"tracking"},
-	Group:   "kafkabeat",
+	Brokers:                 []string{"localhost:9092"},
+	Topics:                  []string{"beat-topic"},
+	Group:                   "kafkabeat",
+	TLSEnabled:              true,
+	TLSCertificateAuthority: "",
+	TLSCertificate:          "",
+	TLSCertificateKey:       "",
 }

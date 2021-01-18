@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/justsocialapps/kafkabeat/beater"
+	"github.com/logrhythm/kafkabeat/beater"
 
 	cmd "github.com/elastic/beats/libbeat/cmd"
 )

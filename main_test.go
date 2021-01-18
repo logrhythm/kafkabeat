@@ -6,7 +6,7 @@ import (
 	"flag"
 	"testing"
 
-	"github.com/justsocialapps/kafkabeat/cmd"
+	"github.com/logrhythm/kafkabeat/cmd"
 )
 
 var systemTest *bool

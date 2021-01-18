@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/justsocialapps/kafkabeat/cmd"
+	"github.com/logrhythm/kafkabeat/cmd"
 )
 
 func main() {

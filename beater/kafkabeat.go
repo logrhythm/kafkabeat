@@ -1,6 +1,7 @@
 package beater
 
 import (
+	"crypto/tls"
 	"fmt"
 	"time"
 
@@ -9,7 +10,7 @@ import (
 	"github.com/elastic/beats/libbeat/logp"
 
 	"github.com/Shopify/sarama"
-	"github.com/justsocialapps/kafkabeat/config"
+	"github.com/logrhythm/kafkabeat/config"
 	cluster "gopkg.in/bsm/sarama-cluster.v2"
 )
 
@@ -20,6 +21,17 @@ type Kafkabeat struct {
 	consumer *cluster.Consumer
 }
 
+const (
+	cycleTime = 10 //will be in seconds
+	// ServiceName is the name of the service
+	ServiceName = "pubsubbeat"
+)
+
+var (
+	receivedLogsInCycle int64
+	fqBeatName          string
+)
+
 // Creates beater
 func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 	config := config.DefaultConfig
@@ -27,10 +39,22 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
 	}
 
+	if errConfig := validateConfig(&config); errConfig != nil {
+		return nil, fmt.Errorf("error parsing config file: %v", errConfig)
+	}
+
+	logp.Info("Config fields: %+v", config)
+
 	kafkaConfig := cluster.NewConfig()
 	kafkaConfig.Consumer.Return.Errors = true
 	kafkaConfig.Group.Return.Notifications = true
 	kafkaConfig.Config.ClientID = "kafkabeat"
+	kafkaConfig.Config.Net.TLS.Enable = true
+	kafkaConfig.Config.Net.TLS.Config = new(tls.Config)
+	if kafkaConfig.Net.TLS.Config == nil {
+		return nil, fmt.Errorf("Nil config")
+	}
+	kafkaConfig.Config.Net.TLS.Config.InsecureSkipVerify = true
 	kafkaConfig.Config.Consumer.Offsets.Initial = sarama.OffsetOldest
 	kafkaConfig.Config.Consumer.MaxWaitTime = 500 * time.Millisecond
 	kafkaConfig.Config.Consumer.MaxProcessingTime = 5000 * time.Millisecond
@@ -56,7 +80,7 @@ func (bt *Kafkabeat) Run(b *beat.Beat) error {
 		PublishMode: beat.GuaranteedSend,
 	})
 	if err != nil {
-		logp.Err("Error connecting to logstash: %s", err.Error())
+		logp.Err("Error connecting to kafka: %s", err.Error())
 	}
 
 	for {
@@ -84,6 +108,7 @@ func (bt *Kafkabeat) Run(b *beat.Beat) error {
 }
 
 func (bt *Kafkabeat) Stop() {
+	logp.Info("Stoping Kafka Beat")
 	bt.client.Close()
 	close(bt.done)
 }
