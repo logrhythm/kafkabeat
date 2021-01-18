@@ -7,6 +7,6 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3
-	golang.org/x/sys v0.0.0-20190405154228-4b34438f7a67
+	golang.org/x/sys v0.0.0-20210110051926-789bb1bd4061
 	gopkg.in/yaml.v2 v2.2.2
 )
