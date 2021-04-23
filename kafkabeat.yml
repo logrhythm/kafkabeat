@@ -17,6 +17,7 @@ kafkabeat:
     tls_certificate: "C:/kafka/kafka.client.keystore.pem"
     # absolute path of key
     tls_certificate_key: "C:/kafka/ca-key"
+    api_key: "This is for testing"
 
 #================================ General =====================================
 # Optional fields that you can specify to add additional information to the
